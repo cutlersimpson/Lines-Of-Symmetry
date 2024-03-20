@@ -12,6 +12,9 @@ def find_lines_of_symmetry(points):
        this is a valid line of symmetry
     5. Normalize the coefficients defining the line to ensure no duplicates
     """
+    if not points:
+        return []
+
     centroid = calculate_centroid(points)
     midpoints = find_midpoints(points)
     all_points = list(set(midpoints + points))

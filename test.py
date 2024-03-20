@@ -3,6 +3,13 @@ from app import find_lines_of_symmetry, coefficients_to_equation
 
 
 class TestFindLinesOfSymmetry(unittest.TestCase):
+    def test_empty(self):
+        points = []
+        coeffs = find_lines_of_symmetry(points)
+        eqns = [coefficients_to_equation(a, b, c) for a, b, c in coeffs]
+        expected_output = []
+        self.assertEqual(eqns, expected_output)
+
     def test_square(self):
         points = [(0, 0), (0, 1), (1, 0), (1, 1)]
         coeffs = find_lines_of_symmetry(points)
