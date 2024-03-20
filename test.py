@@ -10,8 +10,8 @@ class TestFindLinesOfSymmetry(unittest.TestCase):
         expected_output = [
             "y = -1.0x + 1.0",
             "x = 0.5",
-            "y = 1.0x + -0.0",
             "y = 0.0x + 0.5",
+            "y = 1.0x + -0.0",
         ]
         self.assertEqual(eqns, expected_output)
 
@@ -20,6 +20,18 @@ class TestFindLinesOfSymmetry(unittest.TestCase):
         coeffs = find_lines_of_symmetry(points)
         eqns = [coefficients_to_equation(a, b, c) for a, b, c in coeffs]
         expected_output = ["y = 0.0x + 1.0", "x = 1.5"]
+        self.assertEqual(eqns, expected_output)
+
+    def test_rhombus(self):
+        points = [(0, 1), (1, 0), (2, 1), (1, 2)]
+        coeffs = find_lines_of_symmetry(points)
+        eqns = [coefficients_to_equation(a, b, c) for a, b, c in coeffs]
+        expected_output = [
+            "y = 0.0x + 1.0",
+            "y = 1.0x + -0.0",
+            "x = 1.0",
+            "y = -1.0x + 2.0",
+        ]
         self.assertEqual(eqns, expected_output)
 
     def test_trapezoid(self):

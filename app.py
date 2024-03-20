@@ -73,12 +73,11 @@ def find_midpoints(points):
     Find the midpoints between each point and its adjacent points.
     """
     midpoints = []
-    for x1, y1 in points:
-        for x2, y2 in points:
-            if (x1 != x2 and y1 == y2) or (x1 == x2 and y1 != y2):
-                midpoint = ((x1 + x2) / 2, (y1 + y2) / 2)
-                if midpoint not in midpoints and midpoint not in points:
-                    midpoints.append(midpoint)
+    for i, (x1, y1) in enumerate(points):
+        for _, (x2, y2) in enumerate(points[i + 1 :], start=i + 1):
+            midpoint = ((x1 + x2) / 2, (y1 + y2) / 2)
+            if midpoint not in midpoints and midpoint not in points:
+                midpoints.append(midpoint)
     return midpoints
 
 
@@ -99,7 +98,7 @@ def find_mirror_point(point, line_coefficients):
     a, b, c = line_coefficients
     x, y = point
 
-    denominator = a**2 + b**2
+    denominator = a ** 2 + b ** 2
     temp = -2 * ((a * x + b * y + c) / denominator)
     mirror_x = temp * a + x
     mirror_y = temp * b + y
